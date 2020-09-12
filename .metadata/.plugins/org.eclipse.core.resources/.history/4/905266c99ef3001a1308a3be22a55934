@@ -1,0 +1,5 @@
+package com.walmart.exceptions;
+
+public class StockException {
+
+}

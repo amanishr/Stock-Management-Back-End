@@ -1,0 +1,99 @@
+package com.walmart.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.util.List;
+
+import com.walmart.pojo.Product;
+import com.walmart.utils.DbUtil;
+
+public class ProductDao implements ProductDaoInterface {
+
+	Connection connect;
+	Statement st;
+	
+	ProductDao() throws SQLException{
+		connect = DbUtil.getConnection("stock_mgmt");
+		st = connect.createStatement();
+		String query = "show tables like 'products'";
+		ResultSet r = st.executeQuery(query);
+		r.next();
+		if(!r.getString(1).equals("products"))
+			createTable();
+	}
+
+	private void createTable() throws SQLException {
+
+		String create = "create table products (pid int, pname text, cost double, quantity int)";
+		st.executeUpdate(create);
+	}
+	@Override
+	public int addProduct(Product p) {
+
+		int i=0;
+		try {
+			String sql="insert into product values(?,?,?,?)";
+			PreparedStatement pst=connect.prepareStatement(sql);
+			pst.setInt(1, p.getPid());
+			pst.setString(2, p.getPname());
+			pst.setDouble(3, p.getCost());
+			pst.setInt(4, p.getQuantity());
+			i=pst.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+
+	@Override
+	public int updateProdcut(int qty, double price, int pid) {
+		
+		int i=0;
+		try {
+		String sql="update product set quantity=? , cost =? where pid=?";
+		PreparedStatement pst=connect.prepareStatement(sql);
+		pst.setInt(1, qty);
+		pst.setDouble(2, price);
+		pst.setInt(3, pid);
+		i=pst.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+
+	@Override
+	public int deleteProduct(int pid) {
+		
+		int i=0;
+		String sql="delete from product where pid=?";
+		PreparedStatement pst;
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, pid);
+			i=pst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return i;
+		return 0;
+	}
+
+	@Override
+	public Product getProdcutById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

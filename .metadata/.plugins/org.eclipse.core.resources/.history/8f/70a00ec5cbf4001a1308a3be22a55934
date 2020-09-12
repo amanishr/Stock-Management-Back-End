@@ -1,0 +1,40 @@
+package com.walmart.services;
+
+import java.util.List;
+
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Employee;
+
+public class EmployeeService implements EmployeeServiceInterface {
+
+	@Override
+	public int addEmployee(Employee e) throws StockException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int editProdcut(double salary, String active, int eid) throws StockException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int removeEmployee(int eid) throws StockException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Employee getEmployeeById(int id) throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Employee> getAll() throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

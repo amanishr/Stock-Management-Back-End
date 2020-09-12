@@ -1,0 +1,132 @@
+package com.walmart.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Product;
+import com.walmart.pojo.Supplier;
+import com.walmart.utils.DbUtil;
+
+public class SupplierDao implements SupplierDaoInterface {
+
+	Connection connect;
+	Statement st;
+	
+	SupplierDao() throws SQLException{
+		connect = DbUtil.getConnection("stock_mgmt");
+		st = connect.createStatement();
+		String query = "show tables like 'suppliers'";
+		ResultSet r = st.executeQuery(query);
+		if(!r.next())
+			createTable();
+		else if(!r.getString(1).equals("suppliers"))
+			createTable();
+	}
+	
+	private void createTable() throws SQLException {
+
+		String create = "create table suppliers (sid int, sname text, rating double)";
+		st.executeUpdate(create);
+	}
+	
+	@Override
+	public int addSupplier(Supplier s) {
+
+		int i=0;
+		try {
+			String sql="insert into suppliers values(?,?,?)";
+			PreparedStatement pst=connect.prepareStatement(sql);
+			pst.setInt(1, s.getSid());
+			pst.setString(2, s.getSname());
+			pst.setDouble(3, s.getRating());
+			i=pst.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+
+	@Override
+	public int updateSupplier(double rating, int sid) {
+
+		int i=0;
+		try {
+		String sql="update suppliers set rating=? where sid=?";
+		PreparedStatement pst=connect.prepareStatement(sql);
+		pst.setDouble(1, rating);
+		pst.setInt(2, sid);
+		i=pst.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+
+	@Override
+	public int deleteSupplier(int sid) {
+
+		int i=0;
+		String sql="delete from suppliers where sid=?";
+		PreparedStatement pst;
+		try {
+			pst = connect.prepareStatement(sql);
+			pst.setInt(1, sid);
+			i=pst.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i;
+	}
+
+	@Override
+	public Supplier getProdcutById(int id) throws StockException {
+
+		Supplier s=new Supplier();
+		try {
+			String sql="select * from suppliers where sid=?";
+			PreparedStatement pst = connect.prepareStatement(sql);
+			pst.setInt(1, id);
+			ResultSet rs=pst.executeQuery();
+			if(rs.next()) {
+				s.setSid(rs.getInt(1));
+				s.setSname(rs.getString(2));
+				s.setRating(rs.getDouble(3));
+			}
+			else
+				throw new StockException("Supplier does not exist");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return s;
+	}
+
+	@Override
+	public List<Supplier> getAll() {
+
+		List<Supplier> suppliers=new ArrayList<Supplier>();
+		try {
+			String sql="select * from suppliers";
+			Statement pst = connect.createStatement();
+			ResultSet rs=pst.executeQuery(sql);
+			while(rs.next()) {
+				Supplier s=new Supplier();
+				s.setSid(rs.getInt(1));
+				s.setSname(rs.getString(2));
+				s.setRating(rs.getDouble(3));
+				p.setQuantity(rs.getInt(4));
+				products.add(p);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}			
+		return products;
+	}
+
+}

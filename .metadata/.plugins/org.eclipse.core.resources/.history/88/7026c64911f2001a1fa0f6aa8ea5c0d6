@@ -1,0 +1,95 @@
+package com.walmart.pojo;
+
+import java.io.Serializable;
+
+public class Product implements Comparable<Product>, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1578415820571496816L;
+	private int pid;
+	private String pname;
+	private double cost;
+	private int quantity;
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(cost);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + pid;
+		result = prime * result + ((pname == null) ? 0 : pname.hashCode());
+		result = prime * result + quantity;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (Double.doubleToLongBits(cost) != Double.doubleToLongBits(other.cost))
+			return false;
+		if (pid != other.pid)
+			return false;
+		if (pname == null) {
+			if (other.pname != null)
+				return false;
+		} else if (!pname.equals(other.pname))
+			return false;
+		if (quantity != other.quantity)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [pid=" + pid + ", pname=" + pname + ", cost=" + cost + ", quantity=" + quantity + "]";
+	}
+
+	public int getPid() {
+		return pid;
+	}
+
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+
+	public String getPname() {
+		return pname;
+	}
+
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
+	public double getCost() {
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	@Override
+	public int compareTo(Product arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

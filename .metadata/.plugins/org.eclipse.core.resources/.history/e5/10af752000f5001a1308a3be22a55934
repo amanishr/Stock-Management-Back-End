@@ -1,0 +1,91 @@
+package com.walmart.pojo;
+
+import java.io.Serializable;
+
+public class Purchase implements Comparable<Product>, Serializable{
+	
+	private static final long serialVersionUID = -2551390768286127512L;
+	private int saleId;
+	private Product p;
+	private Supplier s;
+	
+	public Purchase(int saleId, Product p, Supplier s) {
+		super();
+		this.saleId = saleId;
+		this.p = p;
+		this.s = s;
+	}
+	
+	public Purchase() {}
+
+	public int getSaleId() {
+		return saleId;
+	}
+
+	public void setSaleId(int saleId) {
+		this.saleId = saleId;
+	}
+
+	public Product getP() {
+		return p;
+	}
+
+	public void setP(Product p) {
+		this.p = p;
+	}
+
+	public Supplier getS() {
+		return s;
+	}
+
+	public void setS(Supplier s) {
+		this.s = s;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((p == null) ? 0 : p.hashCode());
+		result = prime * result + ((s == null) ? 0 : s.hashCode());
+		result = prime * result + saleId;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Purchase other = (Purchase) obj;
+		if (p == null) {
+			if (other.p != null)
+				return false;
+		} else if (!p.equals(other.p))
+			return false;
+		if (s == null) {
+			if (other.s != null)
+				return false;
+		} else if (!s.equals(other.s))
+			return false;
+		if (saleId != other.saleId)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Purchase [saleId=" + saleId + ", p=" + p + ", s=" + s + "]";
+	}
+
+	@Override
+	public int compareTo(Product o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+}

@@ -1,0 +1,15 @@
+package com.walmart.services;
+
+import java.util.List;
+
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Supplier;
+
+public interface SupplierServiceInterface {
+
+	public int addSupplier(Supplier s)throws StockException;
+	public int editSupplier(int qty,double price, int pid)throws StockException;
+	public int removeSupplier(int pid)throws StockException;
+	public Supplier getSupplierById(int id)throws StockException;
+	public List<Supplier> getAll()throws StockException;
+}

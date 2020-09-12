@@ -1,0 +1,78 @@
+package com.walmart.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Supplier;
+import com.walmart.utils.DbUtil;
+
+public class SupplierDao implements SupplierDaoInterface {
+
+	Connection connect;
+	Statement st;
+	
+	SupplierDao() throws SQLException{
+		connect = DbUtil.getConnection("stock_mgmt");
+		st = connect.createStatement();
+		String query = "show tables like 'suppliers'";
+		ResultSet r = st.executeQuery(query);
+		if(!r.next())
+			createTable();
+		else if(!r.getString(1).equals("suppliers"))
+			createTable();
+	}
+	
+	private void createTable() throws SQLException {
+
+		String create = "create table suppliers (sid int, sname text, rating double)";
+		st.executeUpdate(create);
+	}
+	
+	@Override
+	public int addSupplier(Supplier s) {
+
+		int i=0;
+		try {
+			String sql="insert into products values(?,?,?,?)";
+			PreparedStatement pst=connect.prepareStatement(sql);
+			pst.setInt(1, p.getPid());
+			pst.setString(2, p.getPname());
+			pst.setDouble(3, p.getCost());
+			pst.setInt(4, p.getQuantity());
+			i=pst.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+
+	@Override
+	public int updateSupplier(double rating, int sid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteSupplier(int sid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Supplier getProdcutById(int id) throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Supplier> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

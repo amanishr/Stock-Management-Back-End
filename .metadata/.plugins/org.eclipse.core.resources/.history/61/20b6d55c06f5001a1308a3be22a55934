@@ -1,0 +1,14 @@
+package com.walmart.services;
+
+import java.util.List;
+
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Purchase;
+
+public interface PurchaseServiceInterface {
+
+	public int addPurchase(Purchase p)throws StockException;
+	public int removePurchase(int pid)throws StockException;
+	public Purchase getPurchaseById(int id)throws StockException;
+	public List<Purchase> getAll()throws StockException;
+}

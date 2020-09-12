@@ -1,0 +1,34 @@
+package com.walmart.dao;
+
+import java.util.List;
+
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Purchase;
+
+public class PurchaseDao implements PurchaseDaoInterface {
+
+	@Override
+	public int addPurchase(Purchase p) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updatePurchase(String status, int purchaseId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Purchase getPurchaseById(int id) throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Purchase> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

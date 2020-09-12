@@ -1,0 +1,67 @@
+package com.walmart.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+import com.walmart.pojo.Product;
+import com.walmart.utils.DbUtil;
+
+public class ProductDao implements ProductDaoInterface {
+
+	Connection connect;
+	Statement st;
+	
+	ProductDao(){
+		connect = DbUtil.getConnection("stock_mgmt");
+		try {
+			st = connect.createStatement();
+			String query = "show tables like 'products'";
+			ResultSet r = st.executeQuery(query);
+			r.next();
+			if(!r.getString(1).equals("products"))
+				createTable();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	private void createTable() {
+		// TODO Auto-generated method stub
+		String create = "create table products (pid int, pname string, cost double, quantity int";
+		st.executeUpdate(create);
+	}
+	@Override
+	public int addProduct(Product p) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateProdcut(int qty, double price, int pid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteProduct(int pid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Product getProdcutById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

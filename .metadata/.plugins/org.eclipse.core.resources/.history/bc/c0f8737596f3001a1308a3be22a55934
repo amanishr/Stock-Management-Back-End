@@ -1,0 +1,12 @@
+package com.walmart.dao;
+
+import com.walmart.pojo.Product;
+
+public interface ProductDaoInterface {
+	
+	public int addProduct(Product p);
+	public int updateProdcut(int qty,double price, int pid);
+	public int deleteProduct(int pid);
+	public Product getProdcutById(int id);
+	public List<Product> getAll();
+}

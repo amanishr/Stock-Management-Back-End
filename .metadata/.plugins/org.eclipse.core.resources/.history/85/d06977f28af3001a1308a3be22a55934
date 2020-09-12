@@ -1,0 +1,21 @@
+package com.walmart.view;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.walmart.utils.DbUtil;
+
+public class testing {
+
+	public static void main(String[] args) throws SQLException {
+		
+		Connection con = DbUtil.getConnection();
+		Statement st = con.createStatement();
+		String com1 = "create table ab";
+		String com2 = "show tables like 'ab'";
+		int r = st.executeUpdate(com);
+		System.out.println(r);
+	}
+
+}

@@ -1,0 +1,46 @@
+package com.walmart.services;
+
+import java.util.List;
+
+import com.walmart.dao.ProductDao;
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Product;
+
+public class ProductService implements ProductServiceInterface {
+
+	ProductDao productDao;
+	
+	ProductService(){
+		productDao=new ProductDao();
+	}
+	@Override
+	public int addProduct(Product p) throws StockException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int editProdcut(int qty, double price, int pid) throws StockException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int removeProduct(int pid) throws StockException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Product getProdcutById(int id) throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> getAll() throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

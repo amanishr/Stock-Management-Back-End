@@ -1,0 +1,59 @@
+package com.walmart.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Sale;
+import com.walmart.utils.DbUtil;
+
+public class SaleDao implements SaleDaoInterface {
+
+	Connection connect;
+	Statement st;
+	
+	public SaleDao() throws SQLException{
+		connect = DbUtil.getConnection("stock_mgmt");
+		st = connect.createStatement();
+		String query = "show tables like 'products'";
+		ResultSet r = st.executeQuery(query);
+		if(!r.next())
+			createTable();
+		else if(!r.getString(1).equals("products"))
+			createTable();
+	}
+
+	private void createTable() throws SQLException {
+
+		String create = "create table products (pid int, pname text, cost double, quantity int)";
+		st.executeUpdate(create);
+	}
+	
+	@Override
+	public int addSale(Sale s) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteSale(int sid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Sale getSaleById(int id) throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Sale> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

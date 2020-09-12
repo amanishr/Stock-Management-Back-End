@@ -1,0 +1,47 @@
+package com.walmart.services;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.walmart.dao.SupplierDao;
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Supplier;
+
+public class SupplierService implements SupplierServiceInterface {
+
+	SupplierDao supplierDao;
+	
+	public SupplierService() throws SQLException{
+		supplierDao=new SupplierDao();
+	}
+	@Override
+	public int addSupplier(Supplier s) throws StockException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int editSupplier(double rating, int sid) throws StockException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int removeSupplier(int sid) throws StockException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Supplier getSupplierById(int id) throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Supplier> getAll() throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

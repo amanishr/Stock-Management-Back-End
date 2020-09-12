@@ -1,0 +1,215 @@
+package com.walmart.view;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Scanner;
+
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Product;
+import com.walmart.pojo.Supplier;
+import com.walmart.services.ProductService;
+import com.walmart.services.SupplierService;
+
+public class ServicesApp {
+	
+	private static void productServices(Scanner sc) {
+		
+		ProductService pService;
+		try {
+			pService = new ProductService();
+		} catch (SQLException e1) {
+			System.out.println("Unable to connect to database/table try again");
+			e1.printStackTrace();
+			return;
+		}
+		do {
+			System.out.println(
+					"1.Add Product(Id, Name, Cost, Quantity)\n 2. Update Product\n 3. Delete Product \n 4. Get Product By Id \n 5.Get All Products\n 6.Go back to previous menu");
+			switch (sc.nextInt()) {
+			case 1:
+				System.out.println("Enter the product details");
+				Product p = new Product(sc.nextInt(), sc.next(), sc.nextDouble(), sc.nextInt());
+				int i;
+				try {
+					i = pService.addProduct(p);
+					if (i > 0) {
+						System.out.println(i + " product added");
+					}
+					else
+						System.out.println("Operation failed! Try again");
+				} catch (StockException e) {
+					System.out.println(e.getMessage());
+				}
+
+				break;
+			case 2:
+				System.out.println("Enter product id you want to update");
+				try {
+					Product pro = pService.getProdcutById(sc.nextInt());
+					System.out.println("enter the qty");
+					int qty = sc.nextInt();
+					System.out.println("enter the cost");
+					double cost = sc.nextDouble();
+					int j = pService.editProdcut(qty, cost, pro.getPid());
+					if (j > 0) {
+						System.out.println(pro.getPid() + " updated");
+					}
+					else
+						System.out.println("Operation failed! Try again");
+				} catch (StockException e) {
+					
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 3:
+				System.out.println("Enter the pid which you want to delete");
+				try {
+					int k = pService.removeProduct(sc.nextInt());
+					if (k > 0) {
+						System.out.println("deleted");
+					}
+					else
+						System.out.println("Operation failed! Try again");
+				} catch (StockException e) {
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 4:
+				System.out.println("Enter the id  which product you want to?");
+				try {
+					Product product = pService.getProdcutById(sc.nextInt());
+					System.out.println(product);
+				} catch (StockException e) {
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 5:
+				System.out.println("List of Products");
+				try {
+					List<Product> prodcuts = pService.getAll();
+					prodcuts.forEach(p1 -> System.out.println(p1));
+				} catch (StockException e) {
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 6:
+				return;
+			default:
+				System.out.println("invalid");
+			}
+
+		} while (true);
+	}
+	
+	private static void supplierServices(Scanner sc) {
+		
+		SupplierService sService;
+		try {
+			sService = new SupplierService();
+		} catch (SQLException e1) {
+			System.out.println("Unable to connect to database/table try again");
+			e1.printStackTrace();
+			return;
+		}
+		do {
+			System.out.println(
+					"1.Add Supplier(Id, Name, Rating)\n 2. Update Supplier\n 3. Delete Supplier \n 4. Get Supplier By Id \n 5.Get All Supplier\n 6.Go back to previous menu");
+			switch (sc.nextInt()) {
+			case 1:
+				System.out.println("Enter the supplier details");
+				Supplier s = new Supplier(sc.nextInt(), sc.next(), sc.nextDouble());
+				int i;
+				try {
+					i = sService.addSupplier(s);
+					if (i > 0) {
+						System.out.println(i + " supplier added");
+					}
+					else
+						System.out.println("Operation failed! Try again");
+				} catch (StockException e) {
+					System.out.println(e.getMessage());
+				}
+
+				break;
+			case 2:
+				System.out.println("Enter product id which one you need to update");
+				try {
+					Supplier sup = sService.getSupplierById(sc.nextInt());
+					System.out.println("enter the qty");
+					int qty = sc.nextInt();
+					System.out.println("enter the cost");
+					double rating = sc.nextDouble();
+					int j = sService.editSupplier(rating, sup.getSid());
+					if (j > 0) {
+						System.out.println(sup.getSid() + " updated");
+					}
+					else
+						System.out.println("Operation failed! Try again");
+				} catch (StockException e) {
+					
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 3:
+				System.out.println("Enter the pid which you want to delete");
+				try {
+					int k = sService.removeSupplier(sc.nextInt());
+					if (k > 0) {
+						System.out.println("Deleted");
+					}
+					else
+						System.out.println("Operation failed! Try again");
+				} catch (StockException e) {
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 4:
+				System.out.println("Enter the id  which product you want to?");
+				try {
+					Supplier supplier = sService.getSupplierById(sc.nextInt());
+					System.out.println(supplier);
+				} catch (StockException e) {
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 5:
+				System.out.println("List of Products");
+				try {
+					List<Supplier> suppliers = sService.getAll();
+					suppliers.forEach(s1 -> System.out.println(s1));
+				} catch (StockException e) {
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 6:
+				return;
+			default:
+				System.out.println("invalid");
+			}
+
+		} while (true);
+	}
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		do {
+			System.out.println("1. Product Services");
+			System.out.println("2. Supplier Services");
+			
+			switch(sc.nextInt()) {
+			case 1:
+				productServices(sc);
+				break;
+			case 2:
+				supplierServices(sc);
+				break;
+			case 6:
+				System.out.println("Thank You");
+				sc.close();
+				System.exit(0);
+			}
+		}while(true);
+	}
+}

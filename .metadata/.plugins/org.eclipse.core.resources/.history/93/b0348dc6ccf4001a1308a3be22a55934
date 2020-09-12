@@ -1,0 +1,64 @@
+package com.walmart.services;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.walmart.dao.EmployeeDao;
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Employee;
+
+public class EmployeeService implements EmployeeServiceInterface {
+
+	EmployeeDao employeeDao;
+	
+	public EmployeeService() throws SQLException{
+		employeeDao=new EmployeeDao();
+	}
+	@Override
+	public int addEmployee(Employee e) throws StockException {
+
+		int i=0;
+		if(!checkActive(e.getActive())) {
+			throw new StockException("Invalid activity");
+		}
+		if(e.getEid()>0 && e.getEid()< 99999) {
+			if(e.getEname().matches("[a-zA-z]{3,25}")) {
+				i=employeeDao.addEmployee(e);
+			}else {
+				throw new StockException("Invalid Name");
+			}
+		}else {
+			throw new StockException("Invalid Id");
+		}
+		return i;
+	}
+
+	@Override
+	public int editProdcut(double salary, String active, int eid) throws StockException {
+
+		return employeeDao.updateEmployee(salary, active, eid);
+	}
+
+	@Override
+	public int removeEmployee(int eid) throws StockException {
+
+		return employeeDao.deleteEmployee(eid);
+	}
+
+	@Override
+	public Employee getEmployeeById(int id) throws StockException {
+
+		return employeeDao.getEmployeeById(id);
+	}
+
+	@Override
+	public List<Employee> getAll() throws StockException {
+			
+		List<Employee> employees=employeeDao.getAll();
+		if(employees.isEmpty()) {
+			throw new StockException("No Products available");
+		}
+		return employees;
+	}
+
+}

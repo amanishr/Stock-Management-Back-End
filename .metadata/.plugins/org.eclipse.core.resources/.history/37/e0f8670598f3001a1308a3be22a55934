@@ -1,0 +1,48 @@
+package com.walmart.dao;
+
+import java.sql.Connection;
+import java.util.List;
+
+import com.walmart.pojo.Product;
+import com.walmart.utils.DbUtil;
+
+public class ProductDao implements ProductDaoInterface {
+
+	Connection connect;
+	
+	ProductDao(){
+		connect = DbUtil.getConnection("stock_mgmt");
+		Statement st = "show tables like products";
+		
+	}
+	@Override
+	public int addProduct(Product p) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateProdcut(int qty, double price, int pid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteProduct(int pid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Product getProdcutById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,17 @@
+package com.walmart.pojo;
+
+public class Supplier {
+	
+	private int sid;
+	private String sname;
+	private double country;
+	
+	public Supplier(int sid, String sname, double country) {
+		super();
+		this.sid = sid;
+		this.sname = sname;
+		this.country = country;
+	}
+	
+	
+}

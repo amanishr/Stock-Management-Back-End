@@ -1,0 +1,54 @@
+package com.walmart.services;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.walmart.dao.PurchaseDao;
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Product;
+import com.walmart.pojo.Purchase;
+import com.walmart.pojo.Supplier;
+
+public class PurchaseService implements PurchaseServiceInterface {
+
+	PurchaseDao purchaseDao;
+	SupplierService sService;
+	ProductService pService;
+	
+	PurchaseService() throws SQLException{
+		purchaseDao = new PurchaseDao();
+		sService = new SupplierService();
+		pService = new ProductService();
+	}
+	@Override
+	public int addPurchase(int purchaseId, int supplierId, int productId, int quantity, String status)
+			throws StockException {
+
+		int i = 0;
+		Supplier s = sService.getSupplierById(supplierId);
+		Product p = pService.getProdcutById(productId);
+		int qty = p.getQuantity() + quantity;
+		pService.editProdcut(qty, p.getCost(), p.getPid());
+		Purchase pur = new Purchase(purchaseId, p, s, status);
+		purchaseDao.addPurchase(pur);
+	}
+
+	@Override
+	public int updatePurchase(String status, int pid) throws StockException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Purchase getPurchaseById(int id) throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Purchase> getAll() throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

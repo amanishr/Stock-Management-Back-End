@@ -1,0 +1,40 @@
+package com.walmart.dao;
+
+import java.util.List;
+
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Employee;
+
+public class EmployeeDao implements EmployeeDaoInterface {
+
+	@Override
+	public int addEmployee(Employee e) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateEmployee(double salary, boolean active, int eid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteEmployee(int eid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Employee getEmployeeById(int id) throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Employee> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

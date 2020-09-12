@@ -1,0 +1,48 @@
+package com.walmart.services;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.walmart.dao.SaleDao;
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Sale;
+
+public class SaleService implements SaleServiceInterface {
+
+	SaleDao saleDao;
+	
+	public SaleService() throws SQLException{
+		saleDao=new SaleDao();
+	}
+	
+	@Override
+	public int addSale(Sale s) throws StockException {
+
+		int i=0;
+		if(s.getSaleId()>0 && s.getSaleId()< 99999) {
+			i=saleDao.addSale(s);
+		}else {
+			throw new StockException("Invalid Id");
+		}	
+		return i;
+	}
+
+	@Override
+	public int removeSale(int sid) throws StockException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Sale getSaleById(int id) throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Sale> getAll() throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

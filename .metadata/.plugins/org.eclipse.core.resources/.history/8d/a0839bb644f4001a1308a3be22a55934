@@ -1,0 +1,62 @@
+package com.walmart.services;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.walmart.dao.ProductDao;
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Product;
+
+public class ProductService implements ProductServiceInterface {
+
+	ProductDao productDao;
+	
+	ProductService() throws SQLException{
+		productDao=new ProductDao();
+	}
+	@Override
+	public int addProduct(Product p) throws StockException {
+		
+		int i=0;
+		if(p.getPid()>0 && p.getPid()< 99999) {
+			if(p.getPname().matches("[a-zA-z]{3,25}")) {
+				i=productDao.addProduct(p);
+			}else {
+				throw new StockException("Invalid Name");
+			}
+		}else {
+			throw new StockException("Invalid Id");
+		}	
+		return i;
+	}
+
+	@Override
+	public int editProdcut(int qty, double price, int pid) throws StockException {
+
+		return productDao.updateProdcut(qty, price, pid);
+	}
+
+	@Override
+	public int removeProduct(int pid) throws StockException {
+		
+		return productDao.deleteProduct(pid);
+	}
+
+	@Override
+	public Product getProdcutById(int id) throws StockException {
+		
+		return productDao.getProdcutById(id);
+	}
+
+	@Override
+	public List<Product> getAll() throws StockException {
+		
+		List<Product> products=productDao.getAll();
+		if(products.isEmpty()) {
+			throw new BuisnessException("No Products available");
+		}
+		return products;
+		return null;
+	}
+
+}

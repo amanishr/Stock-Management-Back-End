@@ -1,0 +1,7 @@
+package com.walmart.pojo;
+
+import java.io.Serializable;
+
+public class Product implements Comparable<Product>, Serializable{
+
+}

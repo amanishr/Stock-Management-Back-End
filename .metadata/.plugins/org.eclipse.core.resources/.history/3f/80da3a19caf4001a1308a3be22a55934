@@ -1,0 +1,23 @@
+package com.walmart.pojo;
+
+import java.io.Serializable;
+
+public class Employee implements Comparable<Product>, Serializable{
+
+	private int eid;
+	private String ename;
+	private double salary;
+	//true - active, false - resigned
+	private String active;
+	
+	public Employee(int eid, String ename, double salary, String active) {
+		super();
+		this.eid = eid;
+		this.ename = ename;
+		this.salary = salary;
+		this.active = active;
+	}
+	
+	Employee(){}
+	
+}

@@ -1,0 +1,111 @@
+package com.walmart.view;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Scanner;
+
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Product;
+import com.walmart.services.ProductService;
+
+public class ServicesApp {
+	
+	private void productServices() {
+		Scanner sc = new Scanner(System.in);
+		ProductService pService;
+		try {
+			pService = new ProductService();
+		} catch (SQLException e1) {
+			System.out.println("Unable to connect to database/table try again");
+			e1.printStackTrace();
+			return;
+		}
+		do {
+			System.out.println(
+					"1.AddProduct\n 2. Update Product\n 3. DeletProduct \n 4. GetProductById \n 5.GetAll \n 6.Go back to previous menu");
+			switch (sc.nextInt()) {
+			case 1:
+				System.out.println("Enter the product details");
+				Product p = new Product(sc.nextInt(), sc.next(), sc.nextDouble(), sc.nextInt());
+				int i;
+				try {
+					i = pService.addProduct(p);
+					if (i > 0) {
+						System.out.println(i + " product added");
+					}
+				} catch (StockException e) {
+					System.out.println(e.getMessage());
+				}
+
+				break;
+			case 2:
+				System.out.println("Enter product id which one you need to update");
+				try {
+					Product pro = pService.getProdcutById(sc.nextInt());
+					System.out.println("enter the qty");
+					int qty = sc.nextInt();
+					System.out.println("enter the cost");
+					double cost = sc.nextDouble();
+					int j = pService.editProdcut(qty, cost, pro.getPid());
+					if (j > 0) {
+						System.out.println(pro.getPid() + " updated");
+					}
+				} catch (StockException e) {
+					
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 3:
+				System.out.println("Enter the pid which you want to delete");
+				try {
+					int k = pService.removeProduct(sc.nextInt());
+					if (k > 0) {
+						System.out.println("deleted");
+					}
+				} catch (StockException e) {
+					
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 4:
+				System.out.println("Enter the id  which product you want to?");
+				try {
+					Product product = pService.getProdcutById(sc.nextInt());
+					System.out.println(product);
+				} catch (StockException e) {
+					
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 5:
+				System.out.println("List of Products");
+				try {
+					List<Product> prodcuts = pService.getAll();
+					prodcuts.forEach(p1 -> System.out.println(p1));
+				} catch (StockException e) {
+					
+					System.out.println(e.getMessage());
+				}
+				break;
+			case 6:
+				sc.close();
+				System.exit(0);
+			default:
+				System.out.println("invalid");
+			}
+
+		} while (true);
+	}
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("1. Product Services");
+		
+		switch(sc.nextInt()) {
+		case 1:
+			productServices();
+		}
+	}
+
+}

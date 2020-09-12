@@ -1,0 +1,60 @@
+package com.walmart.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Purchase;
+import com.walmart.pojo.Supplier;
+import com.walmart.utils.DbUtil;
+
+public class PurchaseDao implements PurchaseDaoInterface {
+
+	Connection connect;
+	Statement st;
+	
+	public PurchaseDao() throws SQLException{
+		connect = DbUtil.getConnection("stock_mgmt");
+		st = connect.createStatement();
+		String query = "show tables like 'purchases'";
+		ResultSet r = st.executeQuery(query);
+		if(!r.next())
+			createTable();
+		else if(!r.getString(1).equals("purchases"))
+			createTable();
+	}
+	
+	private void createTable() throws SQLException {
+
+		String create = "create table purchases (purchaseId int, supplierId, supplierName, productId int, productName text, cost double, quantity int)";
+		st.executeUpdate(create);
+	}
+	
+	@Override
+	public int addPurchase(Purchase p, Supplier s) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updatePurchase(String status, int purchaseId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Purchase getPurchaseById(int id) throws StockException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Purchase> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

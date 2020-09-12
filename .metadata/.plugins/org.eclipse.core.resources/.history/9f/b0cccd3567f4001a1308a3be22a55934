@@ -1,0 +1,5 @@
+package com.walmart.services;
+
+public class SupplierService {
+
+}

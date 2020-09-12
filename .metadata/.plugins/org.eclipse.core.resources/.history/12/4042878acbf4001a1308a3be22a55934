@@ -1,0 +1,15 @@
+package com.walmart.services;
+
+import java.util.List;
+
+import com.walmart.exceptions.StockException;
+import com.walmart.pojo.Employee;
+
+public interface EmployeeServiceInterface {
+
+	public int addEmployee(Employee e)throws StockException;
+	public int editProdcut(int qty,double price, int pid)throws StockException;
+	public int removeEmployee(int pid)throws StockException;
+	public Employee getProdcutById(int id)throws StockException;
+	public List<Employee> getAll()throws StockException;
+}

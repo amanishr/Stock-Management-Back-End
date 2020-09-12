@@ -1,0 +1,43 @@
+package com.walmart.pojo;
+
+public class Purchase {
+	
+	private int saleId;
+	private Product p;
+	private Supplier s;
+	
+	public Purchase(int saleId, Product p, Supplier s) {
+		super();
+		this.saleId = saleId;
+		this.p = p;
+		this.s = s;
+	}
+	
+	public Purchase() {}
+
+	public int getSaleId() {
+		return saleId;
+	}
+
+	public void setSaleId(int saleId) {
+		this.saleId = saleId;
+	}
+
+	public Product getP() {
+		return p;
+	}
+
+	public void setP(Product p) {
+		this.p = p;
+	}
+
+	public Supplier getS() {
+		return s;
+	}
+
+	public void setS(Supplier s) {
+		this.s = s;
+	}
+	
+	
+}

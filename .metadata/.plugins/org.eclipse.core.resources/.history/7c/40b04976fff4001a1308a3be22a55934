@@ -1,0 +1,8 @@
+package com.walmart.pojo;
+
+public class Purchase {
+	
+	private int saleId;
+	private Product p;
+	private Supplier s;
+}

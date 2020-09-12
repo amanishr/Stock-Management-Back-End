@@ -1,0 +1,23 @@
+package com.walmart.pojo;
+
+import java.io.Serializable;
+
+public class Purchase implements Comparable<Product>, Serializable{
+	
+	private static final long serialVersionUID = -2551390768286127512L;
+	private int saleId;
+	private Product p;
+	private Supplier s;
+	private String status;
+	
+	public Purchase(int saleId, Product p, Supplier s, String status) {
+		super();
+		this.saleId = saleId;
+		this.p = p;
+		this.s = s;
+		this.status = status;
+	}
+	
+	public purchase() {}
+	
+}

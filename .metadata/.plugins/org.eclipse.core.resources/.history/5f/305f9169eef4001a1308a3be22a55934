@@ -1,0 +1,15 @@
+package com.walmart.pojo;
+
+public class Sale {
+
+	private int saleId;
+	private Product p;
+	
+	public Sale(int saleId, Product p) {
+		super();
+		this.saleId = saleId;
+		this.p = p;
+	}
+	
+	public Sale(){}
+}

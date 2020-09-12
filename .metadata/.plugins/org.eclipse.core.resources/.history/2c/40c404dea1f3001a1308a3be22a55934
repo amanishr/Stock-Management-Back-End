@@ -1,0 +1,12 @@
+package com.walmart.services;
+
+import com.walmart.pojo.Product;
+
+public interface ProductServiceInterface {
+
+	public int addProduct(Product p)throws BuisnessException;
+	public int editProdcut(int qty,double price, int pid)throws BuisnessException;
+	public int removeProduct(int pid)throws BuisnessException;
+	public Product getProdcutById(int id)throws BuisnessException;
+	public List<Product> getAll()throws BuisnessException;
+}
